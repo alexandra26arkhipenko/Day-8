@@ -49,9 +49,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookService\BookService.csproj">
+      <Project>{A3CCB77D-9810-45A5-806B-7F3298AA35B2}</Project>
+      <Name>BookService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Books\Books.csproj">
       <Project>{e26d1b51-3b83-4251-9dae-f9ddbe1dd097}</Project>
       <Name>Books</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{46D9F2C3-3D41-4D9B-A4EC-37768E0066F0}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

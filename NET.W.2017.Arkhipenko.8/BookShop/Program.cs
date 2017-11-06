@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Books;
+using Interfaces;
 
 namespace BookShop
 {
@@ -17,7 +18,7 @@ namespace BookShop
             books.Add(new Book(115, "Достоевский11111", "Преступление и наказание", "OOO МоскваПечать", 1995, 12, 520));
             books.Add(new Book(116, "Толстой11111", "Война и мир", "OOO МоскваПечать", 2001, 25, 1740));
             
-            IBookListService  bookListService = new BookListService();
+            IBookService  bookListService = new BookService.BookService();
             
             bookListService.AddBook(books[0]);
             bookListService.AddBook(books[1]);
@@ -35,14 +36,14 @@ namespace BookShop
             bookListService.RemoveBook(116);
             Print(bookListService.GetBookList());
             
-            foreach (var book in bookListService.SortByName(books))
+            foreach (var book in bookListService.Sort(books, BookPart.Name))
             {
                 Console.WriteLine(book.ToString());
             }
             Console.ReadKey();
         }
 
-        private static void Print(List<Book> books)
+        private static void Print(IEnumerable<Book> books)
         {
             foreach (var book in books)
             {
