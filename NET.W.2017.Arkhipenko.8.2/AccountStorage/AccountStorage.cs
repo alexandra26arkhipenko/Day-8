@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Account;
 
 
 namespace AccountStorage
@@ -11,7 +12,7 @@ namespace AccountStorage
         /// <summary>
         /// Field path is the way of file
         /// </summary>
-        private const string Path = "E:\\Bin3";
+        private const string Path = "E:\\Bin9";
         #endregion
 
         #region public
@@ -72,6 +73,8 @@ namespace AccountStorage
             binary.Write(account.OwnerLastName);
             binary.Write(account.Amount);
             binary.Write(account.Points);
+            binary.Write(account.Status.ToString());
+            binary.Write(account.Type.ToString());
             
         }
 
@@ -82,14 +85,18 @@ namespace AccountStorage
             var ownerLastName = binary.ReadString();
             var amount = binary.ReadDecimal();
             var points = binary.ReadInt32();
+            var status = binary.ReadString();
+            var type = binary.ReadString();
 
             return new Account.Account()
             {
                 Id = id,
+                OwnerFirstName = ownerFirstName,
+                OwnerLastName = ownerLastName,
                 Amount = amount,
                 Points = points,
-                OwnerFirstName = ownerFirstName,
-                OwnerLastName = ownerLastName
+                Status = (StatusAccount) Enum.Parse(typeof(StatusAccount), status),
+                Type = (AccountType)Enum.Parse(typeof(AccountType), type)
             };
 
         }

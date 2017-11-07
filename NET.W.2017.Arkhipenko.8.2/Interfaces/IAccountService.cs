@@ -10,6 +10,6 @@ namespace Interfaces
         void AddAmount(int id, decimal amount);
         void DivAmount(int id, decimal amount);
         void CloseAccount(int id);
-        void CreateAccount(int id, string ownerFirstName, string ownerLastName, decimal amount, int points, AccountType type);
+        void CreateAccount(Account.Account account);
     }
 }
