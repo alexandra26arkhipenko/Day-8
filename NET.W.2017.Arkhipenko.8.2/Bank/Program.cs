@@ -21,7 +21,7 @@ namespace Bank
             IAccountService accountService = new AccountService.AccountService(); 
             accountService.CreateAccount(new Account.Account(111, "Alexandra", "Arkhipenko", 100m, 5, AccountType.Base));
             accountService.CreateAccount(new Account.Account(112, "Andrey", "Petrov", 1250m, 40, AccountType.Gold));
-            //accountService.CreateAccount(113, "Galina", "Vizovik", 10245m, 120, AccountType.Premium);
+            accountService.CreateAccount(new Account.Account(113, "Galina", "Vizovik", 10245m, 120, AccountType.Premium));
 
             Print(accountService.GetAllAccounts());
            
@@ -31,7 +31,7 @@ namespace Bank
             accountService.CloseAccount(112);
             Print(accountService.GetAllAccounts());
 
-            accountService.DivAmount(112, 100m);
+            accountService.DivAmount(113, 100m);
             Print(accountService.GetAllAccounts());
 
             Console.ReadKey();
