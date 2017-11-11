@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Books
 {
@@ -6,7 +7,7 @@ namespace Books
     ///     Book modal
     /// </summary>
     
-    public class Book : IEquatable<Book>, IComparable, IComparable<Book>
+    public class Book : IEquatable<Book>, IComparable, IComparable<Book>, IFormattable
     {
         #region private properties 
         /// <summary>
@@ -99,9 +100,24 @@ namespace Books
         /// <returns>string </returns>
         public override string ToString()
         {
-            return string.Format("Book:\"{0}\" {1}, {2} pages \nPublishing company {3}, {4} y.," +
-                                 " ISBN: {5}\n Price: {6} y.e.", Name, Author, Pages, PublishingHouse, Year, Isbn,
-                Price);
+            return ToString("6", null);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            if (string.IsNullOrEmpty(format)) format = "5";
+            
+
+            switch (format)
+            {
+                case "1": return "Book: " + Name +" Author: " + Author;
+                case "2": return "Book: " + Name + " Author: " + Author + " ISBN: " + Isbn;
+                case "3": return "Book: " + Name + " Author: " + Year + " y. " + Author + " ISBN: " + Isbn;
+                case "4": return "Book: " + Name + " Author: " + Year + " y. " +Pages +" p. "+ Author + " ISBN: " + Isbn;
+                case "5": return "Book: " + Name + " Author: " + Year + " y. " + Pages + " p. " + Author + " ISBN: " + Isbn + " Publishing House : " + PublishingHouse;
+                case "6": return "Book: " + Name + " Author: " + Year + " y. " + Pages + " p. " + Author + " ISBN: " + Isbn + " Publishing House : " + PublishingHouse + Price + " y.e ";
+                    default: throw new FormatException(String.Format("The {0} format string is not supported.", format));
+            }
         }
 
         #endregion

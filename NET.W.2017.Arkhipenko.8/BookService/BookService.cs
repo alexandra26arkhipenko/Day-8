@@ -24,15 +24,11 @@ namespace BookService
 
         public BookService(IBookStorageService bookStorage)
         {
+            if (ReferenceEquals(bookStorage, null))
+            {
+                throw new ArgumentException();
+            }
             this.bookStorage = bookStorage;
-            try
-            {
-                books.AddRange(bookStorage.GetBookList());
-            }
-            catch (Exception)
-            {
-                books.Clear();
-            }
         }
         #endregion
 
