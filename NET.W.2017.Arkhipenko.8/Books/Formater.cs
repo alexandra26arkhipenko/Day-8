@@ -2,6 +2,9 @@
 
 namespace Books
 {
+    /// <summary>
+    /// Extention method for book
+    /// </summary>
     public static class Formater
     {
         public static Book BookFormat(this Book book)

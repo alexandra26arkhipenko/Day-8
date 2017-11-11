@@ -15,13 +15,18 @@ namespace BookService
     public class BookService : IBookService
     {
         #region private field
-
+        /// <summary>
+        /// private fields;
+        /// </summary>
         private readonly IBookStorageService bookStorage;
         private List<Book> books = new List<Book>();
         #endregion
 
         #region Constructor
-
+        /// <summary>
+        /// Ctor for bookStorage's initialization
+        /// </summary>
+        /// <param name="bookStorage"></param>
         public BookService(IBookStorageService bookStorage)
         {
             if (ReferenceEquals(bookStorage, null))
@@ -32,6 +37,8 @@ namespace BookService
         }
         #endregion
 
+        #region public
+        /// <inheritdoc />
         public void AddBookToShop(Book book)
         {
             if (ReferenceEquals(book, null))
@@ -43,6 +50,7 @@ namespace BookService
             
         }
 
+        /// <inheritdoc />
         public void RemoveBookFromShop(Book book)
         {
             if (ReferenceEquals(book, null))
@@ -52,6 +60,7 @@ namespace BookService
             books.Remove(book);
         }
 
+        /// <inheritdoc />
         public Book FindBook(IFinder parameter)
         {
             if (ReferenceEquals(parameter, null))
@@ -61,6 +70,7 @@ namespace BookService
             return parameter.FindBookByTeg();
         }
 
+        /// <inheritdoc />
         public void Sort(IComparer<Book> comparator)
         {
             var booksArray = books.ToArray();
@@ -77,14 +87,18 @@ namespace BookService
             books.AddRange(booksArray);
         }
 
+        /// <inheritdoc />
         public void Save()
         {
             bookStorage.SaveBooks(books);
         }
 
+        /// <inheritdoc />
         public IEnumerable<Book> GetAllBooks()
         {
             return bookStorage.GetBookList();
         }
+
+#endregion
     }
 }

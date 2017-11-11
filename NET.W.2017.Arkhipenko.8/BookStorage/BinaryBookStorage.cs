@@ -31,16 +31,13 @@ namespace BookStorage
             this.path = path;
            
         }
-        
+
 
         #endregion
 
         #region public
-        
-        /// <summary>
-        /// Read book from file
-        /// </summary>
-        /// <returns>List of books IEnumerable</returns>
+
+        /// <inheritdoc />
         public IEnumerable<Book> GetBookList()
         {
             List<Book> books = new List<Book>();
@@ -69,10 +66,8 @@ namespace BookStorage
                 Writer(bw, book);
             }
         }
-        
-        /// <summary>
-        /// Save information
-        /// </summary>
+
+        /// <inheritdoc />
         public void SaveBooks(IEnumerable<Book> booksSave)
         {
 

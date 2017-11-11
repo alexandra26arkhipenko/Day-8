@@ -11,7 +11,7 @@ namespace Books
     {
         #region private properties 
         /// <summary>
-        /// Books Gets
+        /// Books properties
         /// </summary>
         public string Isbn { get; }
         public string Author { get; set; }
@@ -100,9 +100,15 @@ namespace Books
         /// <returns>string </returns>
         public override string ToString()
         {
-            return ToString("6", null);
+            return "Book: " + Name + " Author: " + Year + " y. " + Pages + " p. " + Author + " ISBN: " + Isbn + " Publishing House : " + PublishingHouse + Price + " y.e ";
         }
 
+        /// <summary>
+        /// Output options
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="formatProvider"></param>
+        /// <returns>string </returns>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (string.IsNullOrEmpty(format)) format = "5";
