@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Books;
-using Interfaces;
+using IBookStorage;
+using ParameterForSearching;
+
 
 namespace BookService
 { 
@@ -12,107 +15,80 @@ namespace BookService
     public class BookService : IBookService
     {
         #region private field
-        private readonly BookStorage.BookStorage _bookStorage;
+
+        private readonly IBookStorageService bookStorage;
+        private List<Book> books = new List<Book>();
         #endregion
+
         #region Constructor
 
-        public BookService()
+        public BookService(IBookStorageService bookStorage)
         {
-            _bookStorage = new BookStorage.BookStorage();
+            this.bookStorage = bookStorage;
+            try
+            {
+                books.AddRange(bookStorage.GetBookList());
+            }
+            catch (Exception)
+            {
+                books.Clear();
+            }
         }
         #endregion
 
-        #region public
-        /// <summary>
-        /// GetBoolList returns all elements of file 
-        /// </summary>
-        /// <returns>IEnumerable</returns>
-        public IEnumerable<Book> GetBookList()
+        public void AddBookToShop(Book book)
         {
-            return _bookStorage.ReadBookFromFile();
-        }
-
-        /// <summary>
-        /// AddBook adds Book to file
-        /// </summary>
-        /// <param name="book"></param>
-        public void AddBook(Book book)
-        {
-            if (book == null)
-                throw new ArgumentNullException(nameof(book));
-
-            var books = _bookStorage.ReadBookFromFile().ToList();
-
-            if (books.Any(book.Equals))
-                throw new Exception();
-            books.Add(book);
-
-            _bookStorage.OverWriteFile(books);
-        }
-
-        /// <summary>
-        /// RemoveBook deletes from file
-        /// </summary>
-        /// <param name="isbn"></param>
-        public void RemoveBook(int isbn)
-        {
-            var books = _bookStorage.ReadBookFromFile().ToList();
-            var bookForRemove = FindBook(isbn);
-            if (bookForRemove == null)
-                throw new Exception();
-            books.Remove(bookForRemove);
-            _bookStorage.OverWriteFile(books);
-        }
-
-        /// <summary>
-        /// FindBook finds Book in file using ISBN
-        /// </summary>
-        /// <param name="isbn"></param>
-        /// <returns></returns>
-        public Book FindBook(int isbn)
-        {
-            var books = _bookStorage.ReadBookFromFile().ToList();
-            return books.FirstOrDefault(b => b.Isbn == isbn);
-        }
-
-        /// <summary>
-        /// FindBook finds Book in file using Name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public Book FindBook(string name)
-        {
-            var books = _bookStorage.ReadBookFromFile().ToList();
-            return books.FirstOrDefault(b => b.Name == name);
-        }
-
-        /// <summary>
-        /// Sort is sorting list of books
-        /// </summary>
-        /// <param name="books"></param>
-        /// <param name="partForSort"></param>
-        /// <returns>IEnumerable</returns>
-        public IEnumerable<Book> Sort(IEnumerable<Book> books, BookPart partForSort)
-        {
-            switch (partForSort)
+            if (ReferenceEquals(book, null))
             {
-                case BookPart.Isbn:
-                    return books.OrderBy(b => b.Isbn);
-                case BookPart.Name:
-                    return books.OrderBy(b => b.Name);
-                case BookPart.Author:
-                    return books.OrderBy(b => b.Author);
-                case BookPart.Pages:
-                    return books.OrderBy(b => b.Pages);
-                case BookPart.Price:
-                    return books.OrderBy(b => b.Price);
-                case BookPart.PublishHouse:
-                    return books.OrderBy(b => b.PublishingHouse);
-                case BookPart.Year:
-                    return books.OrderBy(b => b.Year);
-                default: return books;
+                throw new ArgumentNullException();
             }
+            
+            books.Add(book);
+            
         }
-#endregion
+
+        public void RemoveBookFromShop(Book book)
+        {
+            if (ReferenceEquals(book, null))
+            {
+                throw new ArgumentNullException();
+            }
+            books.Remove(book);
+        }
+
+        public Book FindBook(IFinder parameter)
+        {
+            if (ReferenceEquals(parameter, null))
+            {
+                throw new ArgumentNullException();
+            }
+            return parameter.FindBookByTeg();
+        }
+
+        public void Sort(IComparer<Book> comparator)
+        {
+            var booksArray = books.ToArray();
+
+            if (ReferenceEquals(comparator, null))
+            {
+                Array.Sort(booksArray);
+            }
+            else
+            {
+                Array.Sort(booksArray, comparator);
+            }
+            books.Clear();
+            books.AddRange(booksArray);
+        }
+
+        public void Save()
+        {
+            bookStorage.SaveBooks(books);
+        }
+
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return bookStorage.GetBookList();
+        }
     }
 }

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2B9DC05-7EAA-41BE-9E43-B867C6CFB40F}</ProjectGuid>
+    <ProjectGuid>{D88662EE-9393-407F-AC8A-E1A406A211D3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BookShop</RootNamespace>
-    <AssemblyName>BookShop</AssemblyName>
+    <RootNamespace>ConsoleApp</RootNamespace>
+    <AssemblyName>ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,24 +42,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Find\FindBookByISBN.cs" />
+    <Compile Include="Find\FindBookByName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sort\SortByName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookService\BookService.csproj">
-      <Project>{A3CCB77D-9810-45A5-806B-7F3298AA35B2}</Project>
+      <Project>{a3ccb77d-9810-45a5-806b-7f3298aa35b2}</Project>
       <Name>BookService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStorage\BookStorage.csproj">
+      <Project>{8ec1095d-ebd1-4e13-b818-e162c99910b5}</Project>
+      <Name>BookStorage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Books\Books.csproj">
       <Project>{e26d1b51-3b83-4251-9dae-f9ddbe1dd097}</Project>
       <Name>Books</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
-      <Project>{46D9F2C3-3D41-4D9B-A4EC-37768E0066F0}</Project>
-      <Name>Interfaces</Name>
+    <ProjectReference Include="..\IBookStorage\IBookStorage.csproj">
+      <Project>{cda62a87-1424-45e3-b418-2fdeb9af87cb}</Project>
+      <Name>IBookStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParameterForSearching\ParameterForSearching.csproj">
+      <Project>{6d29b987-5a60-47f0-be5a-142beb1499bb}</Project>
+      <Name>ParameterForSearching</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
