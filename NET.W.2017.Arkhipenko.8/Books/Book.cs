@@ -14,8 +14,8 @@ namespace Books
         /// Books Gets
         /// </summary>
         public string Isbn { get; }
-        public string Author { get; }
-        public string Name { get; }
+        public string Author { get; set; }
+        public string Name { get; set; }
         public string PublishingHouse { get; }
         public int Year { get; }
         public double Price { get; }
