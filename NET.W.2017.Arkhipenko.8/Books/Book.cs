@@ -100,7 +100,7 @@ namespace Books
         /// <returns>string </returns>
         public override string ToString()
         {
-            return "Book: " + Name + " Author: " + Year + " y. " + Pages + " p. " + Author + " ISBN: " + Isbn + " Publishing House : " + PublishingHouse + Price + " y.e ";
+            return ToString("7", null);
         }
 
         /// <summary>
