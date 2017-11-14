@@ -50,8 +50,8 @@ namespace Books
 
         #region IEquatable methods
         /// <inheritdoc />
-        /// <summary>
         /// IEquatable override method 
+        /// <summary>
         /// </summary>
         /// <param name="book"></param>
         /// <returns>true or false</returns>
