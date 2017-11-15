@@ -5,6 +5,7 @@ using System.Linq;
 using Books;
 using IBookStorage;
 using ParameterForSearching;
+using Logger;
 
 
 namespace BookService
@@ -22,6 +23,8 @@ namespace BookService
         private List<Book> books = new List<Book>();
         #endregion
 
+        private ILogger logger;
+
         #region Constructor
         /// <summary>
         /// Ctor for bookStorage's initialization
@@ -34,6 +37,7 @@ namespace BookService
                 throw new ArgumentException();
             }
             this.bookStorage = bookStorage;
+           
         }
         #endregion
 

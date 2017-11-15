@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NLog" Version="4.4.12" />
+    <PackageReference Include="NLog.Config" Version="4.4.12" />
+    <PackageReference Include="NLog.Windows.Forms" Version="4.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BookStorage\BookStorage.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
     <ProjectReference Include="..\ParameterForSearching\ParameterForSearching.csproj" />
   </ItemGroup>
 

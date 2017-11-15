@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NLog" Version="4.4.12" />
+    <PackageReference Include="NLog.Config" Version="4.4.12" />
+    <PackageReference Include="NLog.Windows.Forms" Version="4.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Books\Books.csproj" />
   </ItemGroup>
 
